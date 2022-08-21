@@ -1,6 +1,6 @@
 # Using bash script for automate installation wordpress
 
-Create ec2 in aws with Terraform "Infrastructure as a code"
+bash script for lamp stack & wordpress
 
 ## Installation
 
