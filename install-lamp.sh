@@ -19,7 +19,7 @@ echo "Install database"
 apt install mysql-server -y
 echo "Database terinstall"
 
-apt install php7.4-fpm php7.4-common php7.4-xml php7.4-zip php7.4-mysql php7.4-mbstring php7.4-json php7.4-curl php7.4-gd php7.4-pgsql -y   
+apt install php7.4-fpm php7.4-common php7.4-xml php7.4-zip php7.4-mysql php7.4-mbstring php7.4-json php7.4-curl php7.4-gd php7.4-pgsql libapache2-mod-php7.4 -y   
 echo "install php & modules"
 
 echo "Start services"
@@ -70,8 +70,10 @@ tar -zxvf latest.tar.gz
 #Change owner & chmod
 chown -R www-data:www-data wordpress/
 chmod -R 755 wordpress/
+mv wordpress/ /var/www/html/
 
 #change dir to wordpress
+mv wordpress/ /var/www/html/
 cd wordpress
 
 #create wp config
@@ -104,13 +106,13 @@ cat > /etc/apache2/sites-available/wordpress.conf <<EOF
     ServerAdmin admin@rodpres.online
     ServerName $your_domain
     # ServerAlias 
-    DocumentRoot /home/oprek/wordpress
+    DocumentRoot /var/www/html/wordpress
     ErrorLog ${APACHE_LOG_DIR}/error.log
     CustomLog ${APACHE_LOG_DIR}/access.log combined
 
-<Directory /home/oprek/wordpress/>
-        Options Indexes FollowSymLinks
-        AllowOverride None
+<Directory /var/www/html/wordpress/>
+        Options FollowSymLinks
+        AllowOverride All
         Require all granted
 </Directory>
 </VirtualHost>
